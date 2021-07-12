@@ -11,7 +11,7 @@ namespace Web.Controllers
     public class UsuarioController : Controller
     {
 
-        List<Usuario> lista = new List<Usuario>();
+
 
         // GET: Usuario
         public ActionResult Index()
@@ -23,13 +23,18 @@ namespace Web.Controllers
         public ActionResult List()
         {
 
-            Usuario u1 = new Usuario("test", "jhgf", 15, "jhgdsksh@njkbvj", "bhjdjkg");
-            Usuario u2 = new Usuario("test", "jhgf", 15, "jhgdsksh@njkbvj", "bhjdjkg");
+            List<Usuario> model = new List<Usuario>();
+
+            using (var context = new HavanLabsContext())
+            {
+
+                model = context.Usuarios.ToList();
+
+            }
 
 
-            lista.Add(u1);
-            lista.Add(u2);
-            return View(lista);
+;
+            return View(model);
         }
 
 
@@ -38,11 +43,42 @@ namespace Web.Controllers
             return View();
         }
 
+
+
         [HttpPost]
 
         public ActionResult Create(Usuario model)
         {
-            lista.Add(model);
+
+            using (var context = new HavanLabsContext())
+            {
+
+                context.Usuarios.Add(model);
+                context.SaveChanges();
+
+            }
+
+
+            return RedirectToAction("List");
+        }
+        public ActionResult Update(int id)
+        {
+
+
+            Usuario model = new Usuario();
+
+            using (var context = new HavanLabsContext())
+            {
+                model = context.Usuarios.Find(id);
+            }
+
+                return View(model);
+        }
+
+
+        [HttpPost]
+        public ActionResult Update(Usuario model)
+        {
             return View();
         }
 

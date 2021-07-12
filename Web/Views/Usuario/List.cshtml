@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Data.Usuario>
+﻿''@model IEnumerable<Data.Usuario>
 
 @{
     ViewBag.Title = "List";
@@ -48,9 +48,9 @@
             @Html.DisplayFor(modelItem => item.Endereco)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Edit", "Update", new { Id=item.Id }) |
+      
+            @Html.ActionLink("Delete", "Delete", new { Id=item.Id })
         </td>
     </tr>
 }
