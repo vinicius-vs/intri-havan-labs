@@ -13,7 +13,7 @@ namespace exercicio01
 
 
 
-        List<CadastroUsuario> lista = new List<CadastroUsuario>();
+        List<Data.Usuario> lista = new List<Data.Usuario>(); // lista para gravar os usuarios utilizando List
 
         public void MenuUsuario()
         {
@@ -78,11 +78,36 @@ namespace exercicio01
                         break;
                     case 1:
 
-                        CadastroUsuario usuario = new CadastroUsuario();
+                        string resposta = "";
 
-                        usuario.Cadastro();
+                        do
+                        {
 
-                        lista.Add(usuario);
+                            Console.WriteLine("Digite o nome do usuario:");
+                            string nome = Data.Usuario.captarString();
+
+                            Console.WriteLine("Digite o sobrenome do usuario:");
+                            string sobrenome = Data.Usuario.captarString();
+
+                            Console.WriteLine("Digite o idade do usuario:");
+                            int idade = Data.Verificar.captarInt();
+
+                            Console.WriteLine("Digite o endereco do usuario:");
+                            string endereco = Data.Usuario.captarString();
+
+                            Console.WriteLine("Digite o email do usuario:");
+                            string email = Data.Usuario.captarString();
+
+
+                            Data.Usuario usuario = new Data.Usuario(nome, sobrenome, idade, email, endereco);
+                            lista.Add(usuario);// adiciona mais um item na lista 
+
+                            Console.Write("Deseja inserir outro usuario(y/n): ");
+                            resposta = Console.ReadLine();
+
+                        } while (resposta == "y");
+
+                        mostrarUsuario();
 
                         break;
                     case 2:
@@ -105,12 +130,12 @@ namespace exercicio01
         private void mostrarUsuario()
         {
 
-            CadastroUsuario user = lista.FirstOrDefault(u => u.nome.Equals("test"));
-            CadastroUsuario user1 = (from u in lista where u.nome == "test" select u).FirstOrDefault();
+            //CadastroUsuario user = lista.FirstOrDefault(u => u.nome.Equals("test")); // procurar se na lista se encontra o nome teste 
+            //CadastroUsuario user1 = (from u in lista where u.nome == "test" select u).FirstOrDefault(); // outro jeito de achar um nome numa lista 
 
 
 
-            foreach (CadastroUsuario usuario in lista)
+            foreach (Usuario usuario in lista) // laço para percorrer um lista de forma mais eficiente 
             {
 
                 Console.WriteLine("***********************************");
@@ -119,7 +144,5 @@ namespace exercicio01
             }
             Console.ReadKey();
         }
-
-
     }
 }

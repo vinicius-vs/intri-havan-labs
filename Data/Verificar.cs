@@ -11,7 +11,7 @@ namespace Data
         public static bool verificarStringEmBranco(string dado)
         {
             //if (String.IsNullOrEmpty(dado)) // metado para verificar se a string é null ou vazia  
-            if (dado.Trim().Equals(""))
+            if (dado.Trim().Equals("")) // Trim retira os espaços do inicio e do fim em uma string 
             {
                 Console.WriteLine("Valor invalido!. tente novamente.");
                 return true;

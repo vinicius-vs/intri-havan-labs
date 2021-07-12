@@ -16,7 +16,7 @@ namespace exercicio01
 
             Menu menu = new Menu();
 
-            menu.MenuUsuario();
+            menu.MenuUsuario();// chama o menu para a interação programa/usuario
 
 
         }
