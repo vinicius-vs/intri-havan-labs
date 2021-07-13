@@ -11,6 +11,7 @@ namespace Web.Controllers
     public class UsuarioController : Controller
     {
 
+        UsuarioRepository repository = new UsuarioRepository();
 
 
         // GET: Usuario
@@ -23,17 +24,8 @@ namespace Web.Controllers
         public ActionResult List()
         {
 
-            List<Usuario> model = new List<Usuario>();
+            List<Usuario> model = repository.ReadAll();
 
-            using (var context = new HavanLabsContext())
-            {
-
-                model = context.Usuarios.ToList();
-
-            }
-
-
-;
             return View(model);
         }
 
@@ -50,29 +42,16 @@ namespace Web.Controllers
         public ActionResult Create(Usuario model)
         {
 
-            using (var context = new HavanLabsContext())
-            {
-
-                context.Usuarios.Add(model);
-                context.SaveChanges();
-
-            }
-
+            repository.Create(model);
 
             return RedirectToAction("List");
         }
         public ActionResult Update(int id)
         {
 
+            Usuario model = repository.ReadById(id);
 
-            Usuario model = new Usuario();
-
-            using (var context = new HavanLabsContext())
-            {
-                model = context.Usuarios.Find(id);
-            }
-
-                return View(model);
+            return View(model);
         }
 
 
@@ -80,27 +59,17 @@ namespace Web.Controllers
         public ActionResult Update(Usuario model)
         {
 
-            using (var context = new HavanLabsContext())
-            {
+            repository.Update(model);
 
-                context.Entry(model).State = System.Data.Entity.EntityState.Modified;
-                context.SaveChanges();
-
-            }
-
-            return View();
+            return RedirectToAction("List");
         }
 
 
         public ActionResult Delete(int id)
         {
 
-            using (var context = new HavanLabsContext())
-            {
-                Usuario model = context.Usuarios.Find(id);
-                context.Usuarios.Remove(model);
-                context.SaveChanges();
-            }
+            repository.Delete(id);
+
             return RedirectToAction("List");
         }
 
