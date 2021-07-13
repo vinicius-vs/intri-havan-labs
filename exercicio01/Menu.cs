@@ -78,36 +78,9 @@ namespace exercicio01
                         break;
                     case 1:
 
-                        string resposta = "";
+                        ModuloUsuario moduloUsuario = new ModuloUsuario();
 
-                        do
-                        {
-
-                            Console.WriteLine("Digite o nome do usuario:");
-                            string nome = Data.Usuario.captarString();
-
-                            Console.WriteLine("Digite o sobrenome do usuario:");
-                            string sobrenome = Data.Usuario.captarString();
-
-                            Console.WriteLine("Digite o idade do usuario:");
-                            int idade = Data.Verificar.captarInt();
-
-                            Console.WriteLine("Digite o endereco do usuario:");
-                            string endereco = Data.Usuario.captarString();
-
-                            Console.WriteLine("Digite o email do usuario:");
-                            string email = Data.Usuario.captarString();
-
-
-                            Data.Usuario usuario = new Data.Usuario(nome, sobrenome, idade, email, endereco);
-                            lista.Add(usuario);// adiciona mais um item na lista 
-
-                            Console.Write("Deseja inserir outro usuario(y/n): ");
-                            resposta = Console.ReadLine();
-
-                        } while (resposta == "y");
-
-                        mostrarUsuario();
+                        moduloUsuario.Create();
 
                         break;
                     case 2:
